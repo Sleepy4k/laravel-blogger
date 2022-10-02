@@ -14,7 +14,7 @@ return [
      |
      */
 
-    'enabled' => env('DEBUGBAR_ENABLED', null),
+    'enabled' => env('APP_DEBUG', false),
     'except' => [
         'telescope*',
         'horizon*',
@@ -34,12 +34,12 @@ return [
      */
     'storage' => [
         'enabled'    => true,
-        'driver'     => 'file', // redis, file, pdo, socket, custom
-        'path'       => storage_path('debugbar'), // For file driver
-        'connection' => null,   // Leave null for default connection (Redis/PDO)
+        'driver'     => env('DEBUGBAR_DRIVER', 'file'), // redis, file, pdo, socket, custom
+        'path'       => storage_path(env('DEBUGBAR_STORAGE_PATH', 'debugbar')), // For file driver
+        'connection' => env('DEBUGBAR_CONNECTION', null),   // Leave null for default connection (Redis/PDO)
         'provider'   => '', // Instance of StorageInterface for custom driver
-        'hostname'   => '127.0.0.1', // Hostname to use with the "socket" driver
-        'port'       => 2304, // Port to use with the "socket" driver
+        'hostname'   => env('DEBUGBAR_HOSTNAME', '127.0.0.1'), // Hostname to use with the "socket" driver
+        'port'       => env('DEBUGBAR_PORT', 2304), // Port to use with the "socket" driver
     ],
 
     /*
@@ -98,7 +98,7 @@ return [
      |
      */
 
-    'include_vendors' => true,
+    'include_vendors' => env('DEBUGBAR_INCLUDE_VENDOR', true),
 
     /*
      |--------------------------------------------------------------------------
@@ -137,7 +137,7 @@ return [
      | Extension, without the server-side code. It uses Debugbar collectors instead.
      |
      */
-    'clockwork' => false,
+    'clockwork' => env('DEBUGBAR_USE_CLOCKWORK', false),
 
     /*
      |--------------------------------------------------------------------------
@@ -158,20 +158,20 @@ return [
         'db'              => true,  // Show database (PDO) queries and bindings
         'views'           => true,  // Views with their data
         'route'           => true,  // Current route information
-        'auth'            => false, // Display Laravel authentication status
+        'auth'            => true, // Display Laravel authentication status
         'gate'            => true,  // Display Laravel Gate checks
         'session'         => true,  // Display session data
         'symfony_request' => true,  // Only one can be enabled..
         'mail'            => true,  // Catch mail messages
-        'laravel'         => false, // Laravel version and environment
-        'events'          => false, // All events fired
-        'default_request' => false, // Regular or special Symfony request logger
-        'logs'            => false, // Add the latest log messages
-        'files'           => false, // Show the included files
-        'config'          => false, // Display config settings
-        'cache'           => false, // Display cache events
+        'laravel'         => true, // Laravel version and environment
+        'events'          => true, // All events fired
+        'default_request' => true, // Regular or special Symfony request logger
+        'logs'            => true, // Add the latest log messages
+        'files'           => true, // Show the included files
+        'config'          => true, // Display config settings
+        'cache'           => true, // Display cache events
         'models'          => true,  // Display models
-        'livewire'        => true,  // Display Livewire (when available)
+        'livewire'        => false,  // Display Livewire (when available)
     ],
 
     /*
@@ -241,7 +241,7 @@ return [
      | from trying to overcome bugs like this: http://trac.nginx.org/nginx/ticket/97
      |
      */
-    'route_prefix' => '_debugbar',
+    'route_prefix' => env('DEBUGBAR_PREFIX', '_debugbar'),
 
     /*
      |--------------------------------------------------------------------------

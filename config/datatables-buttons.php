@@ -13,7 +13,7 @@ return [
          * With Model: App\User (default model)
          * Export filename: users_timestamp
          */
-        'base'  => 'DataTables',
+        'base'  => env('DATATABLES_DIRECTORY', 'DataTables'),
 
         /*
          * Base namespace/directory where your model's are located.
@@ -37,7 +37,7 @@ return [
      * Snappy package: barryvdh/laravel-snappy
      * Excel package: maatwebsite/excel
      */
-    'pdf_generator' => 'snappy',
+    'pdf_generator' => env('DATATABLES_PDF_GENERATOR', 'snappy'),
 
     /*
      * Snappy PDF options.
